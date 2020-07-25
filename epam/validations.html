@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;
+   margin-top:10px;
+   }
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+<script>
+function myFunction() {
+  var flag=1;
+  var a = document.registration.usrnm.value;
+  if(!isNaN(a))
+  {
+   alert("Please Enter Only Characters");
+   document.registration.usrnm.select();
+   flag=0;
+   return false;
+  }
+  var emailfilter=/^\w+[\+\.\w-]*@([\w-]+\.)*\w+[\w-]*\.([a-z]{2,4}|\d+)$/i
+  var b=emailfilter.test(document.registration.email.value);
+  if(b==false)
+  {
+   alert("Please Enter a valid Mail ID");
+   document.registration.email.focus();
+   flag=0;
+   return false;
+  } 
+  var c = document.registration.mobile.value;
+
+   if( c == "" || isNaN(c) || c.length != 10 )
+   {
+      alert( "Please provide a Mobile No of 10 digits" );
+      document.registration.mobile.focus() ;
+      flag=0;
+      return false;
+   }
+    var cd = document.registration.psw.value;
+	var myString=cd;
+    if(cd.length<6 || cd.length>50)
+	{
+	  alert("Password must be of length 6 to 50");
+	  document.registration.psw.focus();
+	  flag=0;
+	  return false;
+	}
+	var ValidateDigits = /[^0-9]/g;
+   var ValidateSpChar = /[a-zA-Z0-9]/g;
+   var ValidateChar = /[^a-zA-Z]/g;
+
+   var digitString = myString.replace(ValidateDigits , "");
+   var specialString = myString.replace(ValidateSpChar, "");
+   var charString = myString.replace(ValidateChar, "");
+   if(specialString < 1)
+   {
+     alert("Passwords must include at least 1 special (#,@,&,$ etc) characters");
+     document.registration.psw.focus();
+	 flag=0;
+     return false;
+   }
+   if(digitString < 1)
+   {
+     alert("Passwords must include at least 1 numeric characters");
+     document.registration.psw.focus();
+	 flag=0;
+     return false;
+   }
+   re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+
+    if(!document.registration.date.value.match(re)) {
+      alert("Invalid date format: " + document.registration.date.value);
+      document.registration.date.focus();
+      return false;
+    }
+	alert("all input fields are validated");
+	return true;
+} 
+</script>
+</head>
+<body>
+
+<form  style="max-width:500px;margin:auto" name="registration" onsubmit="return myFunction()" action="page2.html" method="get">
+  <h2>Register Form</h2>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Username" name="usrnm" required>
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email" required>
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="psw" required>
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-mobile icon"></i>
+    <input class="input-field" type="text" placeholder="Mobile No" name="mobile" required>
+  </div>
+  
+  <div class="input-container">
+    <i class="far fa-calender-alt icon"></i>
+    <input class="input-field" type="text" placeholder="dd/mm/yyyy" name="date" required>
+  </div>
+
+  <button type="submit" class="btn" onclick="myFunction">Register</button>
+  <p id="demo">
+</form>
+
+</body>
+</html>

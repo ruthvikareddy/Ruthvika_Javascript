@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title> Details</title>
+		<style>
+		.body{
+		   margin-top:100px;
+		   border: 1px;
+		   }
+		
+		</style>
+    </head>
+    <body>
+        <script>
+            function getParams(){
+                var idx = document.URL.indexOf('?');
+                var params = new Array();
+                if (idx != -1) {
+                    var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+                    for (var i=0; i<pairs.length; i++){
+                        nameVal = pairs[i].split('=');
+                        params[nameVal[0]] = nameVal[1];
+                    }
+                }
+                return params;
+            }
+            params = getParams();
+            usrnm = unescape(params["usrnm"]);
+            email = unescape(params["email"]);
+            psw = unescape(params["psw"]);
+			mobile=unescape(params["mobile"]);
+			date=unescape(params["date"]);
+            document.write("username = " + usrnm + "<br>");
+            document.write("email = " + email + "<br>");
+            document.write("password = " + psw + "<br>");
+			document.write("mobile no = " + mobile + "<br>");
+			document.write("date = " + date + "<br>");
+        </script>
+    </body>
+</html>
